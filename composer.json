@@ -1,0 +1,42 @@
+{
+  "name": "koseven/koseven",
+  "description": "Koseven Framework - Successor of the Kohana Framework - fully compatible with PHP7+",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "kohana",
+    "kohana-php7",
+    "koseven"
+  ],
+  "homepage": "https://koseven.dev/",
+  "authors": [
+    {
+      "name": "Koseven Team",
+      "homepage": "https://koseven.dev/",
+      "role": "developer"
+    },
+    {
+      "name": "Kohana Team",
+      "email": "team@kohanaframework.org",
+      "homepage": "http://kohanaframework.org/team",
+      "role": "developer"
+    }
+  ],
+  "support": {
+    "forum": "https://koseven.discourse.group/",
+    "issues": "https://github.com/koseven/koseven/issues"
+  },
+  "require": {
+    "php": ">=7.3",
+    "ext-dom": "*",
+    "ext-json": "*",
+    "ext-simplexml": "*",
+    "ext-libxml": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8",
+    "internations/http-mock": "^0.12"
+  },
+  "replace": {
+    "kohana/core": "3.3.*"
+  }
+}
