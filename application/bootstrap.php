@@ -22,7 +22,7 @@ else
  * @link http://koseven.dev/guide/using.configuration
  * @link http://www.php.net/manual/timezones
  */
-date_default_timezone_set('America/Chicago');
+date_default_timezone_set('Europe/Warsaw');
 
 /**
  * Set the default locale.
@@ -120,7 +120,7 @@ if (isset($_SERVER['KOSEVEN_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 KO7::init([
-	'base_url'   => '/',
+	'base_url'   => '/tab_szczepienia/public',
 ]);
 
 /**
@@ -140,11 +140,11 @@ $modules = array(
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	// 'database'   => MODPATH.'database',   // Database access
+	 'database'   => MODPATH.'database',   // Database access
 	// 'encrypt'    => MODPATH.'encrypt',    // Encryption support
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'pagination' => MODPATH.'pagination', // Pagination
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
