@@ -171,6 +171,7 @@ KO7::modules($modules);
  * uncomment the line below and define a preferrably long salt.
  */
 // Cookie::$salt = NULL;
+ Cookie::$salt = "asd";
 /**
  * Cookie HttpOnly directive
  * If set to true, disallows cookies to be accessed from JavaScript
@@ -189,8 +190,15 @@ KO7::modules($modules);
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('default', '(<controller>(/<action>(/<id>)))')
-	->defaults([
-		'controller' => 'welcome',
-		'action'     => 'index',
-	]);
+
+Route::set('admin', 'admin(/<controller>(/<action>(/<id>)(/<id2>)))')
+  ->defaults(array(
+    'directory'    => 'Admin',
+    'controller'  => 'news',
+    'action'    => 'index',
+  ));
+Route::set('default', '(/<controller>(/<action>(/<id>)(/<id2>)))')
+  ->defaults(array(
+    'controller'  => 'welcome',
+    'action'    => 'index',
+  ));
