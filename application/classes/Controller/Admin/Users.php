@@ -6,20 +6,22 @@ class Controller_Admin_Users extends Controller_Admin_Main {
 		$users=ORM::factory('User');
 		if(@$_GET) $this->filter($users);
 		$data['users']=$users->order_by('name')->order_by('surname')->find_all();
-		$this->template->content=View::factory("admin/users/index");
+		//print_r($data['users']);die();
+		$this->template->content=View::factory("admin/users/index", $data);
 	}
 	
 	private function filter($users){
 		if(@$_GET['name']) $users->where('name', 'like', '%'.$_GET['name'].'%');
 		if(@$_GET['surname']) $users->where('surname', 'like', '%'.$_GET['surname'].'%');
 		if(@$_GET['login']) $users->where('login', 'like', '%'.$_GET['login'].'%');
-		if(@$_GET['admin']) $users->where('admin', '=', 1);
+		if(@$_GET['admin']==1) $users->where('admin', '=', 1);
+		elseif(@$_GET['admin']==-1) $users->where_open()->where('admin', '!=', 1)->or_where('admin', 'is', null)->where_close();
 	}
 	
 	public function action_edit(){
 		if(@$_POST) $this->save();
 		$data['user']=ORM::factory('User', $this->request->param("id"));
-		$this->template->content=View::factory("admin/users/edit");
+		$this->template->content=View::factory("admin/users/edit", $data);
 	}
 	
 	private function save(){
@@ -30,6 +32,7 @@ class Controller_Admin_Users extends Controller_Admin_Main {
 		$user->admin=@$_POST['admin'] ? : null;
 		if(@$_POST['password']) $user->admin=$this->pass_hash($_POST['password']);
 		$user->save();
+		HTTP::redirect("admin/users?login=".$user->login);
 	}
 	
 	private function pass_hash($password){

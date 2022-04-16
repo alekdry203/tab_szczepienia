@@ -191,9 +191,15 @@ KO7::modules($modules);
  * defaults for the URI.
  */
 
+/*Route::set('admin/users', 'admin/users(/<action>(/<id>)(/<id2>))')
+  ->defaults(array(
+    'directory'    => 'admin',
+    'controller'  => 'users',
+    'action'    => 'index',
+  ));//*/
 Route::set('admin', 'admin(/<controller>(/<action>(/<id>)(/<id2>)))')
   ->defaults(array(
-    'directory'    => 'Admin',
+    'directory'    => 'admin',
     'controller'  => 'news',
     'action'    => 'index',
   ));

@@ -7,6 +7,8 @@ class Controller_Admin_Login extends Controller_Template {
 	public function before(){
 		parent::before();
 		session_start();
+		//phpinfo();die();
+		if(@$_SESSION['user_id']) HTTP::redirect("admin/users");
 	}
 	
 	public function action_index(){

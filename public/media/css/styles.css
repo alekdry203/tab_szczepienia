@@ -1,0 +1,113 @@
+body{
+	background-color: #ccf;
+}
+
+a{
+	text-decoration: none;
+	color: #000;
+}
+
+.content{
+	margin: 0% 20%;
+	width: 60%;
+}
+
+.menuBox{
+	margin:30px 0px;
+	padding: 0% 20%;
+}
+
+.menuButton{
+	background-color: #cecefe;
+	padding: 5px 10px;
+	border: solid 1px #000000;
+}
+
+.menuButton:hover{
+	background-color: #8080ff;
+	color: #fff;
+	padding: 5px 10px;
+	border-color: #fff;
+}
+
+.searchBox{
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.searchFormEl{
+	margin: 10px;
+}
+
+/*.searchFormEl label{
+	width: 100px
+}*/
+
+.button{
+	background-color: #3399ff;
+	padding: 5px 10px;
+	border: solid 1px #000000;
+}
+
+.button:hover{
+	background-color: #0066cc;
+	color: #fff;
+	padding: 5px 10px;
+	border-color: #fff;
+}
+
+.linkButton{
+	background-color: #809fff;
+	padding: 5px 10px;
+	border: solid 1px #000000;
+}
+
+.linkButton:hover{
+	background-color: #3366ff;
+	color: #fff;
+	padding: 5px 10px;
+	border-color: #fff;
+}
+
+.button, .linkButton, .menuButton{
+	cursor: pointer;
+}
+
+table{
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+	background-color: #b3ecff;
+}
+
+table, th, td{
+	border: 1px solid;
+}
+
+th, td{
+	padding: 7px;
+}
+
+th{
+	background-color: #0099cc;
+	/*color: #fff;*/
+}
+
+tr:hover{
+	background-color: #fff;
+}
+
+
+.formBox{
+	margin: 20px;
+}
+
+.formEl{
+	margin: 10px;
+}
+
+.formEl label{
+	display: inline-block;
+	width: 100px;
+}
