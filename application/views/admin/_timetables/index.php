@@ -16,14 +16,14 @@
 				<? endforeach ?>
 			</select>
 		</div>
-		<div class="searchFormEl">
+		<!--div class="searchFormEl">
 			<label>Status:</label>
 			<input type="radio" name="status" value="1" <?= @$_GET['status']==1 ? 'checked' : null ?> /> wolne
 			<input type="radio" name="status" value="2" <?= @$_GET['status']==2 ? 'checked' : null ?> /> zarezerwowane
 			<input type="radio" name="status" value="3" <?= @$_GET['status']==3 ? 'checked' : null ?> /> zrealizowane
-		</div>
+		</div-->
 		<input type="submit" class="button" value="Szukaj" />
-		<a href="<?= URL::base() ?>index.php/admin/timetables/add" class="linkButton">dodaj</a>
+		<a href="<?= URL::base() ?>index.php/admin/timetables/edit" class="linkButton">dodaj</a>
 	</div>
 <?= form::close() ?>
 
@@ -32,23 +32,23 @@
 		<tr>
 			<th>Dzień</th>
 			<th>Lekarz</th>
-			<th>Status</th>
+			<!-->Status</th-->
 			<th>Operacje</th>
 		</tr>
 	</thead>
 	<tbody>
 		<? foreach($timetables as $timetable): ?>
 			<tr>
-				<td><?= $timetable->vaccination_date ?></td>
+				<td><?= $timetable->day ?></td>
 				<td><?= $timetable->user->name.' '.$timetable->user->surname ?></td>
-				<td>
+				<!--td>
 					<?
-						if($timetable->patients_pesel) echo 'wolne'
+						//if($timetable->patient_pesel) echo 'wolne'
 					?>
-				</td>
+				</td-->
 				<td>
-					<a href="<?= URL::base() ?>index.php/admin/timetables/edit/<?= $timetable->id ?>" class="linkButton">edytuj</a>
-					<a href="<?= URL::base() ?>index.php/admin/timetables/delete/<?= $timetable->id ?>"  onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
+					<a href="<?= URL::base() ?>index.php/admin/timetables/edit/<?= $timetable->user->id.'?date='.$timetable->day ?>" class="linkButton">edytuj</a>
+					<a href="<?= URL::base() ?>index.php/admin/timetables/delete_day/<?= $timetable->user->id.'?date='.$timetable->day ?>"  onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
 				</td>
 			</tr>
 		<? endforeach ?>
@@ -75,7 +75,7 @@
 			}
 		}
 		
-		
+		/*
 		// zerowanie wyboru statusu
 		var status=$('input[name=status]').val() ? $('input[name=status]').val() : 0;
 		$('input[name=status]').click(function(){
