@@ -52,7 +52,7 @@
 				</td>
 				<td>
 					<a href="<?= URL::base() ?>index.php/admin/timetables/edit/<?= $timetable->id ?>" class="linkButton">edytuj</a>
-					<a href="<?= URL::base() ?>index.php/admin/timetables/delete/<?= $timetable->id ?>"  onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
+					<a href="<?= URL::base() ?>index.php/admin/timetables/delete/<?= $timetable->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
 				</td>
 			</tr>
 		<? endforeach ?>

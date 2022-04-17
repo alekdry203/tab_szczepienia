@@ -1,42 +1,107 @@
 <?= form::open(null, array('method'=>'get')) ?>
 	<div class="searchBox">
 		<div class="searchFormEl">
-			<label>Imię:</label>
+			<label>Numer partii:</label>
+			<input type="text" name="serial_no[0]" value="<?= @$_GET['serial_no'][0] ?>" />
+			 - 
+			<input type="text" name="serial_no[1]" value="<?= @$_GET['serial_no'][1] ?>" />
+			<span class="error serialNoError">Numer partii od nie może być większy niż numer partii do!</span>
+		</div>
+		<div class="searchFormEl">
+			<label>Nazwa:</label>
 			<input type="text" name="name" value="<?= @$_GET['name'] ?>" />
 		</div>
 		<div class="searchFormEl">
-			<label>Nazwisko:</label>
-			<input type="text" name="surname" value="<?= @$_GET['surname'] ?>" />
+			<label>Producent:</label>
+			<input type="text" name="producer" value="<?= @$_GET['producer'] ?>" />
 		</div>
 		<div class="searchFormEl">
-			<label>Login:</label>
-			<input type="text" name="login" value="<?= @$_GET['login'] ?>" />
+			<label>Data ważności:</label>
+			<input type="date" name="expiration_date[0]" value="<?= @$_GET['expiration_date'][0] ?>" />
+			 - 
+			<input type="date" name="expiration_date[1]" value="<?= @$_GET['expiration_date'][1] ?>" />
+			<span class="error dateError">Data od nie może być większa niż data do!</span>
 		</div>
 		<input type="submit" class="button" value="Szukaj" />
-		<a href="<?= URL::base() ?>index.php/admin/users/edit" class="linkButton">dodaj</a>
+		<a href="<?= URL::base() ?>index.php/admin/warehouse/add" class="linkButton">dodaj</a>
 	</div>
 <?= form::close() ?>
 
 <table>
 	<thead>
 		<tr>
-			<th>Imię i nazwisko</th>
-			<th>Login</th>
-			<th>Admin</th>
+			<th>Nazwa</th>
+			<th>Producent</th>
+			<th>Numer partii</th>
+			<th>Data ważności</th>
 			<th>Operacje</th>
 		</tr>
 	</thead>
 	<tbody>
-		<? foreach($users as $user): ?>
+		<? foreach($warehouse as $vaccine): ?>
 			<tr>
-				<td><?= $user->name.' '.$surname ?></td>
-				<td><?= $user->login ?></td>
-				<td><?= $user->admin ? 'tak' : 'nie' ?></td>
+				<td><?= $vaccine->name ?></td>
+				<td><?= $vaccine->login ?></td>
+				<td><?//= $vaccine->admin ? 'tak' : 'nie' ?></td>
+				<td><?//= $vaccine->admin ? 'tak' : 'nie' ?></td>
 				<td>
-					<a href="<?= URL::base() ?>index.php/admin/users/edit<?= $user->id ?>" class="linkButton">edytuj</a>
-					<a href="<?= URL::base() ?>index.php/admin/users/delete<?= $user->id ?>" class="linkButton">usuń</a>
+					<a href="<?= URL::base() ?>index.php/admin/users/warehouse/<?= $vaccine->id ?>" class="linkButton">edytuj</a>
+					<a href="<?= URL::base() ?>index.php/admin/users/warehouse/<?= $vaccine->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
 				</td>
 			</tr>
 		<? endforeach ?>
 	</tbody>
 </table>
+
+
+<script>
+	$(document).ready(function(){
+		// data 0 nie może być większa od 1
+		$('input[name="expiration_date[0]"]').change(function(){
+			check_dates();
+		});
+		$('input[name="expiration_date[1]"]').change(function(){
+			check_dates();
+		});
+		function check_dates(){
+			var date0=$('input[name="expiration_date[0]"]').val();
+			var date1=$('input[name="expiration_date[1]"]').val();
+			if(date0 && date1 && date0>date1){
+				$('input[name="expiration_date[1]"]').val(date0)
+				$('.dateError').show();
+			}else{
+				$('.dateError').hide();
+			}
+		}
+		
+		// numer 0 nie może być większy od 1
+		$('input[name="serial_no[0]"]').change(function(){
+			check_dates();
+		});
+		$('input[name="serial_no[1]"]').change(function(){
+			check_dates();
+		});
+		function check_serial_no(){
+			var date0=$('input[name="serial_no[0]"]').val();
+			var date1=$('input[name="serial_no[1]"]').val();
+			if(date0 && date1 && date0>date1){
+				$('input[name="serial_no[1]"]').val(date0)
+				$('.serialNoError').show();
+			}else{
+				$('.serialNoError').hide();
+			}
+		}
+		
+		/*
+		// zerowanie wyboru statusu
+		var status=$('input[name=status]').val() ? $('input[name=status]').val() : 0;
+		$('input[name=status]').click(function(){
+			if(status==$(this).val()){
+				status=0;
+				$(this).prop('checked', false);
+			}else{
+				status=$(this).val();
+			}
+		});//*/
+	});
+</script>
