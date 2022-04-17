@@ -16,6 +16,7 @@ class Controller_Admin_Timetables extends Controller_Admin_Main {
 		if(@$_GET['date'][0]) $timetables->where('vaccination_date', '>=', $_GET['date'][0].' 00:00:00');
 		if(@$_GET['date'][1]) $timetables->where('vaccination_date', '<=', $_GET['date'][1].' 23:59:59');
 		if(@$_GET['user_id']) $timetables->where('users_id', '=', $_GET['user_id']);
+		if(@$_GET['patient_pesel']) $timetables->where('patients_pesel', '=', $_GET['patient_pesel']);
 		if(@$_GET['status']==1) $timetables->where('patients_pesel', 'is', null);
 		elseif(@$_GET['status']==2) $timetables->where('patients_pesel', 'is not', null)->where('payment', 'is', null);
 		elseif(@$_GET['status']==3) $timetables->where('payment', 'is not', null);//*/

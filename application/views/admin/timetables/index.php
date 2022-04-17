@@ -17,6 +17,10 @@
 			</select>
 		</div>
 		<div class="searchFormEl">
+			<label>PESEL pacjenta:</label>
+			<input type="text" name="patient_pesel" value="<?= @$_GET['patient_pesel'] ?>" />
+		</div>
+		<div class="searchFormEl">
 			<label>Status:</label>
 			<input type="radio" name="status" value="1" <?= @$_GET['status']==1 ? 'checked' : null ?> /> wolne
 			<input type="radio" name="status" value="2" <?= @$_GET['status']==2 ? 'checked' : null ?> /> zarezerwowane
