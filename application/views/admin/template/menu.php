@@ -8,4 +8,7 @@
 	<a href="<?= URL::base() ?>index.php/admin/timetables/index">
 		<span class="menuButton">Okienka</span>
 	</a>
+	<a href="<?= URL::base() ?>index.php/admin/patients/index">
+		<span class="menuButton">Pacjenci</span>
+	</a>
 </div>
