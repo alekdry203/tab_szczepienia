@@ -6,6 +6,7 @@
 			 - 
 			<input type="text" name="serial_no[1]" value="" required />
 			<span class="error serialNoError">Numer partii od nie może być większy niż numer partii do!</span>
+			sprawdzić ajaxem czy można taki zakres dodać
 		</div>
 		<div class="formEl">
 			<label>Nazwa:</label>

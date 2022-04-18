@@ -53,8 +53,9 @@
 				<td><?= $patient->city.', '.$patient->street.' '.$patient->local_no ?></td>
 				<td><?= $patient->email ?></td>
 				<td>
-					<a href="<?= URL::base() ?>index.php/admin/patients/edit/<?= $patient->id ?>" class="linkButton">edytuj</a>
-					<a href="<?= URL::base() ?>index.php/admin/patients/delete/<?= $patient->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
+					<a href="<?= URL::base() ?>index.php/admin/patients/edit/<?= $patient->pesel ?>" class="linkButton">edytuj</a>
+					<a href="<?= URL::base() ?>index.php/admin/timetables?patient_pesel=<?= $patient->pesel ?>" class="linkButton">szczepienia</a>
+					<a href="<?= URL::base() ?>index.php/admin/patients/delete/<?= $patient->pesel ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
 				</td>
 			</tr>
 		<? endforeach ?>

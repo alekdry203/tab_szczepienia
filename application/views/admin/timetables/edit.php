@@ -23,6 +23,7 @@
 			<label>PESEL pacjenta:</label>
 			<input type="text" name="patients_pesel" value="<?= $timetable->patients_pesel ?>" />
 		</div>
+		dodać wybór szczepionki
 		<div class="formEl">
 			<label>Opłacono:</label>
 			<input type="checkbox" name="payment" value="1" <?= $timetable->payment ? 'checked' : null ?> />

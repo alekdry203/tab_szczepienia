@@ -27,24 +27,51 @@ class Controller_Admin_Patients extends Controller_Admin_Main {
 	}
 	
 	private function save(){
-		$patient=ORM::factory('Patient', @$_POST['id']);
+		$patient=ORM::factory('Patient', @$_POST['pesel']);
+		$patient->pesel=$_POST['pesel'];
 		$patient->name=$_POST['name'];
 		$patient->surname=$_POST['surname'];
-		$patient->login=$_POST['login'];
-		$patient->admin=@$_POST['admin'] ? : null;
-		if(@$_POST['password']) $patient->admin=$this->pass_hash($_POST['password']);
+		$patient->email=$_POST['email'];
+		$patient->city=$_POST['city'];
+		$patient->street=$_POST['street'];
+		$patient->local_no=$_POST['local_no'];
 		$patient->save();
-		HTTP::redirect("admin/patients?login=".$patient->login);
+		HTTP::redirect("admin/patients");
 	}
-	
-	private function pass_hash($password){
-		$salf=$salt_pattern='1ad, 3,asd 5, 9, 14, 15, asdas20, ';
-		return md5($salf.md5($password).$salf);
-	}
-	
-	
+
 	public function action_delete(){
+		die('przy usuwaniu trzeba by usunąć też wszystkie szczepienia - chyba że deaktywowanie konta');
 		ORM::factory('Patient', $this->request->param("id"))->delete();
 		HTTP::redirect("admin/patients");
 	}
+
+	/*public function action_vaccines(){
+		//if(@$_POST) $this->save_vaccines();
+		$data['patient']=ORM::factory('Patient', $this->request->param("id"));
+		$vaccines=$data['patient']->timetables;
+		if(@$_GET) $this->filter_vaccines($vaccines);
+		$data['vaccines']=$vaccines->order_by('vaccination_date')->find_all();
+		$this->template->content=View::factory("admin/patients/vaccines", $data);
+	}
+	
+	private function filter_vaccines($vaccines){
+		if(@$_GET['user_id']) $vaccines->where('users_id', '=', $_GET['user_id']);
+		if(@$_GET['name']) $vaccines->where('name', 'like', '%'.$_GET['name'].'%');
+		if(@$_GET['producer']) $vaccines->where('producer', 'like', '%'.$_GET['producer'].'%');
+		if(@$_GET['date'][0]) $vaccines->where('vaccination_date', '<=', $_GET['date'][0].' 00:00:00');
+		if(@$_GET['date'][1]) $vaccines->where('vaccination_date', '>=', $_GET['date'][1].' 00:00:00');
+		if(@$_GET['status']==2) $vaccines->where('payment', 'is', null);
+		elseif(@$_GET['status']==3) $vaccines->where('payment', 'is not', null);
+	}
+	
+	private function save_vaccines(){
+		
+	}
+
+	public function action_delete_vaccine(){
+		die('przy usuwaniu tylko wyczyścić pesel i szczepionkę');
+		ORM::factory('Patient', $this->request->param("id"))->delete();
+		HTTP::redirect("admin/patients/vaccines");
+	}//*/
+
 }

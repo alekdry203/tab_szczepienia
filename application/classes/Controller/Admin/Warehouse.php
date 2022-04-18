@@ -12,10 +12,14 @@ class Controller_Admin_Warehouse extends Controller_Admin_Main {
 	
 	private function filter($warehouse){
 		print_r($_GET);die();
+		if(@$_GET['serial_no'][0]) $warehouse->where('serial_no', '<=', $_GET['serial_no'][0]);
+		if(@$_GET['serial_no'][1]) $warehouse->where('serial_no', '>=', $_GET['serial_no'][1]);
 		if(@$_GET['name']) $warehouse->where('name', 'like', '%'.$_GET['name'].'%');
-		if(@$_GET['surname']) $warehouse->where('surname', 'like', '%'.$_GET['surname'].'%');
-		if(@$_GET['login']) $warehouse->where('login', 'like', '%'.$_GET['login'].'%');
-		if(@$_GET['admin']) $warehouse->where('admin', '=', 1);
+		if(@$_GET['producer']) $warehouse->where('producer', 'like', '%'.$_GET['producer'].'%');
+		if(@$_GET['expiration_date'][0]) $warehouse->where('expiration_date', '<=', $_GET['expiration_date'][0]);
+		if(@$_GET['expiration_date'][1]) $warehouse->where('expiration_date', '>=', $_GET['expiration_date'][1]);
+		//if(@$_GET['status']==1) $timetables->where('patients_pesel', 'is', null);
+		//elseif(@$_GET['status']==2) $timetables->where('patients_pesel', 'is not', null);
 	}
 	
 	public function action_add(){

@@ -3,6 +3,7 @@
 		<div class="formEl">
 			<label>Numer partii:</label>
 			<input type="text" name="serial_no" value="<?= @$vaccine->serial_no ?>" required />
+			sprawdzić ajaxem czy można taki dodać
 		</div>
 		<div class="formEl">
 			<label>Nazwa:</label>

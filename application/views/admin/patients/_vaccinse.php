@@ -1,6 +1,14 @@
 <?= form::open(null, array('method'=>'get')) ?>
 	<div class="searchBox">
 		<div class="searchFormEl">
+			<label>Nazwa:</label>
+			<input type="date" name="name" value="<?= @$_GET['name'] ?>" />
+		</div>
+		<div class="searchFormEl">
+			<label>Producent:</label>
+			<input type="date" name="producer" value="<?= @$_GET['producer'] ?>" />
+		</div>
+		<div class="searchFormEl">
 			<label>Data:</label>
 			<input type="date" name="date[0]" value="<?= @$_GET['date'][0] ?>" />
 			 - 
@@ -17,12 +25,7 @@
 			</select>
 		</div>
 		<div class="searchFormEl">
-			<label>PESEL pacjenta:</label>
-			<input type="text" name="patient_pesel" value="<?= @$_GET['patient_pesel'] ?>" />
-		</div>
-		<div class="searchFormEl">
 			<label>Status:</label>
-			<input type="radio" name="status" value="1" <?= @$_GET['status']==1 ? 'checked' : null ?> /> wolne
 			<input type="radio" name="status" value="2" <?= @$_GET['status']==2 ? 'checked' : null ?> /> zarezerwowane
 			<input type="radio" name="status" value="3" <?= @$_GET['status']==3 ? 'checked' : null ?> /> zrealizowane
 		</div>
@@ -41,20 +44,20 @@
 		</tr>
 	</thead>
 	<tbody>
-		<? foreach($timetables as $timetable): ?>
+		<? foreach($vaccines as $vaccine): ?>
 			<tr>
-				<td><?= $timetable->vaccination_date ?></td>
-				<td><?= $timetable->user->name.' '.$timetable->user->surname ?></td>
+				<td><?= $vaccine->vaccination_date ?></td>
+				<td><?= $vaccine->user->name.' '.$vaccine->user->surname ?></td>
 				<td>
 					<?
-						if(!$timetable->patients_pesel) echo 'wolne';
-						elseif($timetable->patients_pesel && !$timetable->payment) echo 'zarezerwowane';
-						elseif($timetable->patients_pesel && $timetable->payment) echo 'zrealizowane';
+						if(!$vaccine->patients_pesel) echo 'wolne';
+						elseif($vaccine->patients_pesel && !$vaccine->payment) echo 'zarezerwowane';
+						elseif($vaccine->patients_pesel && $vaccine->payment) echo 'zrealizowane';
 					?>
 				</td>
 				<td>
-					<a href="<?= URL::base() ?>index.php/admin/timetables/edit/<?= $timetable->id ?>" class="linkButton">edytuj</a>
-					<a href="<?= URL::base() ?>index.php/admin/timetables/delete/<?= $timetable->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
+					<a href="<?= URL::base() ?>index.php/admin/timetables/edit/<?= $vaccine->id ?>" class="linkButton">edytuj</a>
+					<a href="<?= URL::base() ?>index.php/admin/timetables/delete/<?= $vaccine->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
 				</td>
 			</tr>
 		<? endforeach ?>
