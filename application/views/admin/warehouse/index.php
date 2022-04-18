@@ -34,6 +34,7 @@
 			<th>Producent</th>
 			<th>Numer partii</th>
 			<th>Data ważności</th>
+			<th>Status</th>
 			<th>Operacje</th>
 		</tr>
 	</thead>
@@ -41,12 +42,13 @@
 		<? foreach($warehouse as $vaccine): ?>
 			<tr>
 				<td><?= $vaccine->name ?></td>
-				<td><?= $vaccine->login ?></td>
-				<td><?//= $vaccine->admin ? 'tak' : 'nie' ?></td>
-				<td><?//= $vaccine->admin ? 'tak' : 'nie' ?></td>
+				<td><?= $vaccine->producer ?></td>
+				<td><?= $vaccine->serial_no ?></td>
+				<td><?= $vaccine->expiration_date ?></td>
+				<td><?= $vaccine->timetables->count_all() ? 'wykorzystane' : 'wolne' ?></td>
 				<td>
-					<a href="<?= URL::base() ?>index.php/admin/users/warehouse/<?= $vaccine->id ?>" class="linkButton">edytuj</a>
-					<a href="<?= URL::base() ?>index.php/admin/users/warehouse/<?= $vaccine->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
+					<a href="<?= URL::base() ?>index.php/admin/warehouse/edit/<?= $vaccine->serial_no ?>" class="linkButton">edytuj</a>
+					<a href="<?= URL::base() ?>index.php/admin/warehouse/delete/<?= $vaccine->serial_no ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
 				</td>
 			</tr>
 		<? endforeach ?>
@@ -76,10 +78,10 @@
 		
 		// numer 0 nie może być większy od 1
 		$('input[name="serial_no[0]"]').change(function(){
-			check_dates();
+			check_serial_no();
 		});
 		$('input[name="serial_no[1]"]').change(function(){
-			check_dates();
+			check_serial_no();
 		});
 		function check_serial_no(){
 			var date0=$('input[name="serial_no[0]"]').val();

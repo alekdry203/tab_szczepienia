@@ -25,8 +25,8 @@ class Controller_Admin_Warehouse extends Controller_Admin_Main {
 	}
 	
 	private function save_add(){
-		print_r($_POST);die();
-		for($serial_no=$_POST['serial_no'][0]; $serial_no<=$_POST['serial_no'][1]; $serial_no){
+		//print_r($_POST);die();
+		for($serial_no=$_POST['serial_no'][0]; $serial_no<=$_POST['serial_no'][1]; $serial_no++){
 			$warehouse=ORM::factory('Vaccinationwarehouse');
 			$warehouse->serial_no=$serial_no;
 			$warehouse->name=$_POST['name'];
@@ -39,24 +39,25 @@ class Controller_Admin_Warehouse extends Controller_Admin_Main {
 	
 	public function action_edit(){
 		if(@$_POST) $this->save_edit();
-		$data['warehouse']=ORM::factory('Vaccinationwarehouse', $this->request->param("id"));
+		$data['vaccine']=ORM::factory('Vaccinationwarehouse', $this->request->param("id"));
 		$this->template->content=View::factory("admin/warehouse/edit", $data);
 	}
 	
 	private function save_edit(){
-		print_r($_POST);die();
-		$warehouse=ORM::factory('Vaccinationwarehouse', @$_POST['serial_no']);
-		//$warehouse->serial_no=$_POST['serial_no'];
-		$warehouse->name=$_POST['name'];
-		$warehouse->producer=$_POST['producer'];
-		$warehouse->expiration_date=$_POST['expiration_date'];
-		$warehouse->save();
+		//print_r($_POST);die();
+		$vaccine=ORM::factory('Vaccinationwarehouse', @$_POST['serial_no']);
+		//$vaccine->serial_no=$_POST['serial_no'];
+		$vaccine->name=$_POST['name'];
+		$vaccine->producer=$_POST['producer'];
+		$vaccine->expiration_date=$_POST['expiration_date'];
+		$vaccine->save();
 		HTTP::redirect("admin/warehouse");
 	}
 	
 	public function action_delete(){
-		die('sprawdzić czy nie wykorzystano / zarezerwowano');
-		ORM::factory('Vaccinationwarehouse', $this->request->param("id"))->delete();
+		$vaccine=ORM::factory('Vaccinationwarehouse', $this->request->param("id"));
+		if($vaccine->timetables->count_all()) die('nie można usunąć wykorzystanych - chyba że admin (wtedy jak uzupełnić szczepionkę w okienkach)');
+		else $vaccine->delete();
 		HTTP::redirect("admin/warehouse");
 	}
 }

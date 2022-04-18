@@ -1,25 +1,46 @@
 <?= form::open(null, array('method'=>'post')) ?>
-	<input type="hidden" name="id" value="<?= @$user->id ?>" />
 	<div class="formBox">
 		<div class="formEl">
-			<label>Imię:</label>
-			<input type="text" name="name" value="<?= @$user->name ?>" />
+			<label>Numery partii:</label>
+			<input type="text" name="serial_no[0]" value="" required />
+			 - 
+			<input type="text" name="serial_no[1]" value="" required />
+			<span class="error serialNoError">Numer partii od nie może być większy niż numer partii do!</span>
 		</div>
 		<div class="formEl">
-			<label>Nazwisko:</label>
-			<input type="text" name="surname" value="<?= @$user->surname ?>" />
+			<label>Nazwa:</label>
+			<input type="text" name="name" value="" required />
 		</div>
 		<div class="formEl">
-			<label>Login:</label>
-			<input type="text" name="login" value="<?= @$user->login ?>" />
+			<label>Producent:</label>
+			<input type="text" name="producer" value="" required />
 		</div>
 		<div class="formEl">
-			<label>Hasło:</label>
-			<input type="password" name="password" value="<?//= @$user->password ?>" />
+			<label>Data ważności:</label>
+			<input type="date" name="expiration_date" value="" required />
 		</div>
 		<input type="submit" class="button" value="zapisz" />
-		<? if(@$user->id): ?>
-			<a href="<?= URL::base() ?>index.php/admin/users/delete<?= $user->id ?>" class="button">usuń</a>
-		<? endif ?>
 	</div>
 <?= form::close() ?>
+
+<script>
+	$(document).ready(function(){
+		// numer 0 nie może być większy od 1
+		$('input[name="serial_no[0]"]').change(function(){
+			check_serial_no();
+		});
+		$('input[name="serial_no[1]"]').change(function(){
+			check_serial_no();
+		});
+		function check_serial_no(){
+			var date0=$('input[name="serial_no[0]"]').val();
+			var date1=$('input[name="serial_no[1]"]').val();
+			if(date0 && date1 && date0>date1){
+				$('input[name="serial_no[1]"]').val(date0)
+				$('.serialNoError').show();
+			}else{
+				$('.serialNoError').hide();
+			}
+		}
+	});
+</script>
