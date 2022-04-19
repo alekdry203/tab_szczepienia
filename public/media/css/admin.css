@@ -21,7 +21,7 @@ a{
 }
 
 .menuButton{
-	background-color: #cecefe;
+	background-color: #b3b3ff;;
 	padding: 5px 10px;
 	border: solid 1px #000000;
 }
@@ -121,4 +121,41 @@ tr:hover{
 	display: none;
 	color: #f00;
 	font-weight: bold;
+}
+
+.headerBox{
+	width: 100%;
+	background-color: #e6e6ff;
+}
+
+.headerTitle{
+	margin: 0px 20%;
+	padding: 20px;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.userBox{
+	float: right;
+}
+
+.loginContent{
+	margin: 0% 33%;
+	width: 34%;
+	background-color: #b3b3ff;
+	height: 100%;
+	padding: 10px;
+}
+
+.loginBox form{
+	display: flex;
+	flex-direction: column;
+	/*justify-content: center;*/
+	width: 500px;
+	margin: auto;
+}
+
+.loginFormEl{
+	margin: 20px;
+	text-align: center;
 }

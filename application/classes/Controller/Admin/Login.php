@@ -8,10 +8,10 @@ class Controller_Admin_Login extends Controller_Template {
 		parent::before();
 		session_start();
 		//phpinfo();die();
-		if(@$_SESSION['user_id']) HTTP::redirect("admin/users");
 	}
 	
 	public function action_index(){
+		if(@$_SESSION['user_id']) HTTP::redirect("admin/users");
 		//die('ok');
 		if(@$_POST) $this->login();
 		$this->template->content=View::factory("admin/login/index");
@@ -24,6 +24,7 @@ class Controller_Admin_Login extends Controller_Template {
 		//print_r($user);die();
 		if(!$user->id) return;
 		$_SESSION['user_id']=$user->id;
+		$_SESSION['login']=$user->login;
 		if($user->admin) $_SESSION['admin']=1;
 		HTTP::redirect("admin/users");
 	}
