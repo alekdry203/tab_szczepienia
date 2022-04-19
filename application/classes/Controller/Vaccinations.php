@@ -69,7 +69,7 @@ class Controller_Vaccinations extends Controller_Main {
 	}
 	
 	private function check_if_logged(){
-		/*if(@$_SESSION['user_name'] && @$_SESSION['user_surname'] && @$_SESSION['pesel']) return;
+		if(@$_SESSION['user_name'] && @$_SESSION['user_surname'] && @$_SESSION['pesel']) return;
 		$_SESSION['redirect']=str_replace(URL::base().'index.php/', '', $_SERVER['REQUEST_URI']);
 		HTTP::redirect("login");/*/
 		$_SESSION['pesel']=12345678901;
