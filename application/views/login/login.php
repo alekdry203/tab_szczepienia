@@ -3,9 +3,9 @@
 	<?= form::open(null, array('method'=>'post')) ?>
 		<div class="loginFormEl">
 			<label>PESEL:</label>
-			<input type="text" name="pesel" <?= @$_POST ? 'disabled' : 'required' ?> />
+			<input type="text" name="pesel" value="<?= @$_POST['pesel'] ?>" <?= @$_POST ? 'disabled' : 'required' ?> />
 		</div>
-		<? if(@$_POST['pesel'] || 1): ?>
+		<? if(@$_POST['pesel']): ?>
 			<div class="loginFormEl">
 				<label>Kod aktywacyjny:</label>
 				<input type="text" name="action_code" required />
