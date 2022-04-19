@@ -32,6 +32,7 @@
 		</div>
 		<div class="loginFormEl">
 			<input type="submit" class="button" value="Zarejestruj" />
+			(dodać recaptche?)
 		</div>
 	<?= form::close() ?>
 </div>

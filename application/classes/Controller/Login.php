@@ -10,16 +10,10 @@ class Controller_Login extends Controller_Main {
 		$this->template->content=View::factory("login/index");
 	}
 	
-	private function login(){
-		if(@$_POST['pesel']) $this->verify_pesel();
-		elseif(@$_POST['pesel_confirm'] && @$_POST['action_code']) $this->verify_code();
-		else $this->registration();
-	}
-	
 	private function verify_pesel(){
 		$patient=ORM::factory('Patient')->where('pesel', 'like', @$_POST['pesel'])->find();
 		if($patient->pesel){
-			die('wysyłanie maila z kodem');
+			$this->send_verification_code($patient);
 		}else{
 			@$_POST['failed']['pesel']=1;
 		}
@@ -44,7 +38,26 @@ class Controller_Login extends Controller_Main {
 	}
 	
 	private function registration(){
-		
+		$patient=ORM::factory('Patient');
+		unset($_POST['registration']);
+		foreach(@$_POST as $key=>$val) $patient->$key=$val;
+		if(@$patient->save()){
+			foreach(@$_POST as $row) unset($row);
+			$_POST['pesel']=$patient->pesel;
+			$_POST['registration']=1;
+			$this->send_verification_code($patient);
+		}else{
+			@$_POST['failed']['registration']=1;
+		}
+	}
+	
+	private function send_verification_code($patient){
+		$patient->action_code=substr(uniqid(),0,12);
+		$patient->save();
+		$body=View::factory("login/action_code_mail", compact('patient'));
+		//$body='testowa wiadomość';
+		//$headers; //dodać jak nie działa
+		mail($patient->email, 'Szczepienia - kod weryfikacyjny', $body);
 	}
 	
 	public function action_logout(){

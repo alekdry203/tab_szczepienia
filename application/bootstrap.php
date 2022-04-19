@@ -203,9 +203,9 @@ Route::set('admin', 'admin(/<controller>(/<action>(/<id>)(/<id2>)))')
     'controller'  => 'news',
     'action'    => 'index',
   ));
-Route::set('vaccines', 'vaccines(/<action>(/<id>)(/<id2>))')
+Route::set('vaccinations', 'vaccinations(/<action>(/<id>)(/<id2>))')
   ->defaults(array(
-    'controller'  => 'vaccines',
+    'controller'  => 'vaccinations',
     'action'    => 'index',
   ));
 Route::set('login', 'login(/<action>(/<id>)(/<id2>))')

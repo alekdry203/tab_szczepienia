@@ -7,7 +7,7 @@
 			<label><?= $vaccine->name ?></label>
 			(producent <?= $vaccine->producer ?>)
 			<div class="vaccineButtonBox">
-				<a href="<?= URL::base().'index.php/vaccines/sign_up/'.$vaccine->name.'/'.$vaccine->producer ?>">
+				<a href="<?= URL::base().'index.php/vaccinations/index?vaccine='.$vaccine->name.';'.$vaccine->producer ?>">
 					<span class="vaccineButton">zapisz się na szczepienie</span>
 				</a>
 			</div>
@@ -16,7 +16,7 @@
 			<label><?= $vaccine->name ?></label>
 			(producent <?= $vaccine->producer ?>)
 			<div class="vaccineButtonBox">
-				<a href="<?= URL::base().'index.php/vaccines/sign_up/'.$vaccine->name.'/'.$vaccine->producer ?>">
+				<a href="<?= URL::base().'index.php/vaccinations/index?vaccine='.$vaccine->name.';'.$vaccine->producer ?>">
 					<span class="vaccineButton">zapisz się na szczepienie</span>
 				</a>
 			</div>

@@ -1,9 +1,9 @@
 <div class="menuBox">
-	<a href="<?= URL::base() ?>index.php/vaccines/index">
+	<a href="<?= URL::base() ?>index.php/vaccinations/index">
 		<span class="menuButton">Szczepienia</span>
 	</a>
-	<a href="<?= URL::base() ?>index.php/vaccines/index">
-		<span class="menuButton">Szczepienia</span>
+	<a href="<?= URL::base() ?>index.php/vaccinations/vaccines">
+		<span class="menuButton">Szczepionki</span>
 	</a>
 	<?/*/?><div class="userBox">
 		<?= @$_SESSION['login'] ?>
