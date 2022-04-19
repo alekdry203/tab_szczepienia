@@ -203,6 +203,16 @@ Route::set('admin', 'admin(/<controller>(/<action>(/<id>)(/<id2>)))')
     'controller'  => 'news',
     'action'    => 'index',
   ));
+Route::set('vaccines', 'vaccines(/<action>(/<id>)(/<id2>))')
+  ->defaults(array(
+    'controller'  => 'vaccines',
+    'action'    => 'index',
+  ));
+Route::set('login', 'login(/<action>(/<id>)(/<id2>))')
+  ->defaults(array(
+    'controller'  => 'login',
+    'action'    => 'index',
+  ));
 Route::set('default', '(/<controller>(/<action>(/<id>)(/<id2>)))')
   ->defaults(array(
     'controller'  => 'welcome',

@@ -1,5 +1,5 @@
-
-	<div class="loginBox"><?= form::open(null, array('method'=>'post')) ?>
+<div class="loginBox">
+	<?= form::open(null, array('method'=>'post')) ?>
 		<div class="loginFormEl">
 			<label>login:</label>
 			<input type="text" name="login" required />
@@ -18,5 +18,5 @@
 				<span class="linkButton">strona główna</span>
 			</a>
 		</div>
-<?= form::close() ?>
-	</div>
+	<?= form::close() ?>
+</div>

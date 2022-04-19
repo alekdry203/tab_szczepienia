@@ -17,7 +17,7 @@ class Controller_Main extends Controller_Template {
 		//$this->template->content=View::factory("welcome/index"); // wstawianie wygenerowanego widoku do szablonu
 		//nazwa klasy controllera musi być taka sama jak pliku
 		//metody w klasie jeśli mają być odpalane z paska przeglądarki muszą być public + przed nazwą musi być dodane action_ + musi być zwracany wygenerowany widok inaczej rzuca błąd (chyba że dacie $this->auto_render=false; - ale tego nie bdzmy używac)
-		
+		session_start();
 	}
 
 }
