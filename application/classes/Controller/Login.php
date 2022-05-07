@@ -13,6 +13,7 @@ class Controller_Login extends Controller_Main {
 	private function verify_pesel(){
 		$patient=ORM::factory('Patient')->where('pesel', 'like', @$_POST['pesel'])->find();
 		if($patient->pesel){
+			//die('lol');
 			$this->send_verification_code($patient);
 		}else{
 			@$_POST['failed']['pesel']=1;

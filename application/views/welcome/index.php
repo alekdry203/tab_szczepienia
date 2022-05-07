@@ -22,4 +22,36 @@
 	<li>do wysyłania maili użyjemy funkcji mail() - poczytać w manual php (musi być włączony serwer mailingowy i opcja sendmail - phpinfo() poszukać)</li>
 	<li>do generowania pdf użyjemy libki TCPDF - wygooglować tcpdf php przykłady (libke dodam, tym sie nie martwić)</li>
 	<li>w controllerze Main są podstawowe informacje</li>
+	<li>
+		konfiguracja xamppa pod wysyłkę maili przez gmail (jak Szymon zdecyduje się postawić serwer na linuxie to tam trzeba zainstalować sendmail czy jakoś tak)
+		<br />
+		<a href="https://stackhowto.com/how-to-send-mail-from-localhost-in-php-using-xampp/">
+			<span class="vaccineButton">konfiguracja mailingu</span>
+		</a>
+	</li>
 </ol>
+
+<div class="loginBox">
+	<label class="loginBoxTitle">Logowanie</label>
+	<?= form::open('welcome/mail_test', array('method'=>'post')) ?>
+		<div class="loginFormEl">
+			<label>email:</label>
+			<input type="text" name="email" required="" />
+		</div>
+		<div class="loginFormEl">
+			<label>temat:</label>
+			<input type="text" name="subject" required="" />
+		</div>
+		<div class="loginFormEl">
+			<label>treść:</label>
+			<textarea name="body"></textarea>
+		</div>
+		<div class="loginFormEl">
+			<input type="submit" class="button" value="test maila" />
+		</div>
+	<?= form::close() ?>
+</div>
+
+<a href="<?= URL::base().'index.php/welcome/tcdpdf_test' ?>">
+	<span class="vaccineButton">test tcpdf</span>
+</a>

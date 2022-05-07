@@ -213,6 +213,11 @@ Route::set('login', 'login(/<action>(/<id>)(/<id2>))')
     'controller'  => 'login',
     'action'    => 'index',
   ));
+Route::set('welcome', 'welcome(/<action>(/<id>)(/<id2>))')
+  ->defaults(array(
+    'controller'  => 'welcome',
+    'action'    => 'index',
+  ));
 Route::set('default', '(/<controller>(/<action>(/<id>)(/<id2>)))')
   ->defaults(array(
     'controller'  => 'welcome',
