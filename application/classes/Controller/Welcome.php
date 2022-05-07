@@ -22,7 +22,46 @@ class Controller_Welcome extends Controller_Main {
 	}
 	
 	public function action_tcpdf_test(){
-		die('w trakcie');
+		//die('w trakcie');
+		//$this->auto_render=false;
+		$name='testowy_pdf';
+		require_once('../TCPDF/tcpdf.php');
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);			
+		$pdf->SetTitle($name);
+		$pdf->setFontSubsetting(true);
+		$pdf->SetFont('freeserif', 'b', 16);
+		
+		$pdf->setPageOrientation('L');
+		
+		$pdf->AddPage();
+		
+		$pdf->Write(0, 'numer test', '', 0, 'L', true, 0, false, false, 0);
+
+		
+		$pdf->Ln();
+		$pdf->Write(0, 'Test', '', 0, 'L', true, 0, false, false, 0);
+			
+		$pdf->SetFont('freeserif', '', 16);
+		$pdf->Ln();
+		$pdf->Write(0, 'Nazwa test', '', 0, 'L', true, 0, false, false, 0);
+		$pdf->Ln();
+		
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetFont('freeserif', '', 8);
+		$pdf->SetLineStyle(array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(153, 153, 153)));
+		$pdf->Ln();
+		
+		
+		$pdf->MultiCell(55, 8, __('Działanie'), 1, 'C', 1, 0);
+		$pdf->MultiCell(20, 8, __('Os. odpow.'), 1, 'C', 1, 0);
+		$pdf->Ln();
+		$pdf->MultiCell(10, 8, __('Prog.')."\n[%]", 1, 'C', 1, 0);
+		
+		
+		$pdf->Output($name.".pdf"); //generowany do przeglądarki
+		//$pdf->Output(str_replace('application\classes\Controller', 'public\\', __DIR__).$name.".pdf", 'F'); //generowany do pliku w folderze public
+		
+		die();
 	}
 
 } // End Welcome

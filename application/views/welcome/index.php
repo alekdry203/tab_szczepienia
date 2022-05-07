@@ -32,7 +32,7 @@
 </ol>
 
 <div class="loginBox">
-	<label class="loginBoxTitle">Logowanie</label>
+	<label class="loginBoxTitle">Test mailingu</label>
 	<?= form::open('welcome/mail_test', array('method'=>'post')) ?>
 		<div class="loginFormEl">
 			<label>email:</label>
@@ -47,11 +47,11 @@
 			<textarea name="body"></textarea>
 		</div>
 		<div class="loginFormEl">
-			<input type="submit" class="button" value="test maila" />
+			<input type="submit" class="button" value="wyślij" />
 		</div>
 	<?= form::close() ?>
 </div>
 
-<a href="<?= URL::base().'index.php/welcome/tcdpdf_test' ?>">
+<a href="<?= URL::base().'index.php/welcome/tcpdf_test' ?>">
 	<span class="vaccineButton">test tcpdf</span>
 </a>
