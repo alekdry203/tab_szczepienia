@@ -22,6 +22,7 @@
 		<!--link rel="shortcut icon" href="<?=URL::base() ?>media/img/favicon.ico" type="image/x-icon"-->
 	</head>
 	<body>
+		<?= @$_SESSION['action_code'] ?>
 		<?= View::factory('template/header') ?>
 		<?= View::factory('template/menu') ?>
 		<div class="content">

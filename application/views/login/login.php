@@ -12,7 +12,7 @@
 				<input type="hidden" name="pesel_confirm" value="<?= @$_POST['pesel'] ?>" />
 			</div>
 			<span class="notify">Na mailu znajduje się kod sprawdzający potrzebny do zalogowania.</span>
-		<? else: ?>
+		<? elseif(@$_POST['failed']['pesel']): ?>
 			<span class="error">Coś poszło nie tak, spróbuj ponownie</span>
 		<? endif ?>
 		<div class="loginFormEl">
