@@ -218,6 +218,11 @@ Route::set('welcome', 'welcome(/<action>(/<id>)(/<id2>))')
     'controller'  => 'welcome',
     'action'    => 'index',
   ));
+Route::set('patients', 'patients(/<action>(/<id>)(/<id2>))')
+  ->defaults(array(
+    'controller'  => 'patients',
+    'action'    => 'index',
+  ));
 Route::set('default', '(/<controller>(/<action>(/<id>)(/<id2>)))')
   ->defaults(array(
     'controller'  => 'welcome',

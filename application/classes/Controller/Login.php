@@ -55,9 +55,8 @@ class Controller_Login extends Controller_Main {
 	private function send_verification_code($patient){
 		$patient->action_code=substr(uniqid(),0,12);
 		$patient->save();
+		@$_SESSION['action_code']=$patient->action_code;
 		$body=View::factory("login/action_code_mail", compact('patient'));
-		//$body='testowa wiadomość';
-		//$headers; //dodać jak nie działa
 		mail($patient->email, 'Szczepienia - kod weryfikacyjny', $body);
 	}
 	
