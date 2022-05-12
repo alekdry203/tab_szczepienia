@@ -56,6 +56,9 @@ class Controller_Patients extends Controller_Main {
 	public function action_deny_vaccination(){
 		//die('anulowanie szczepienia - zostawić zawartość kolumn vaccination_date i users_id dla tego szczepioenia, reszta null');
 		$vaccination=ORM::factory('Timetable', $this->request->param("id"));
+		
+		$check_date=date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s'). ' + 3 days'));
+		if($vaccination->vaccination_date<=$check_date || $vaccination->payment) die('nie można zrezygnować ze szczepienia na 3 dni przed ani ze zrealizowanego');
 		$vaccination->patients_pesel=null;
 		$vaccination->vaccinations_warehouse_serial_no=null;
 		$vaccination->payment=null;

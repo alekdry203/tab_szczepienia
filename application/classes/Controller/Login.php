@@ -8,7 +8,7 @@ class Controller_Login extends Controller_Main {
 	}
 	
 	public function action_index(){
-		//if(@$_SESSION['user_id']) HTTP::redirect("admin/users");
+		//if(@$_SESSION['pesel']) HTTP::redirect("admin/users");
 		if(@$_POST['registration']) $this->registration();
 		elseif(@$_POST['pesel']) $this->verify_pesel();
 		elseif(@$_POST['pesel_confirm'] && @$_POST['action_code']) $this->verify_code();
@@ -28,8 +28,11 @@ class Controller_Login extends Controller_Main {
 	private function verify_code(){
 		$patient=ORM::factory('Patient')->where('pesel', 'like', @$_POST['pesel_confirm'])->find();
 		if(!$patient->pesel || $patient->action_code!=$_POST['action_code']){
-			die('wysłać drugi kod');
+			//die('wysłać drugi kod');
 			@$_POST['failed']['code']=1;
+			@$_POST['pesel']=@$_POST['pesel_confirm'];
+			unset($_POST['pesel_confirm']);
+			$this->send_verification_code($patient);
 			return;
 		}
 		@$_SESSION['pesel']=$patient->pesel;
@@ -62,7 +65,10 @@ class Controller_Login extends Controller_Main {
 		$patient->save();
 		@$_SESSION['action_code']=$patient->action_code;
 		$body=View::factory("login/action_code_mail", compact('patient'));
-		mail($patient->email, 'Szczepienia - kod weryfikacyjny', $body);
+		$headers="From: olekdrynda@gmail.com\n";
+		$headers.="MIME-Version: 1.0\r\n";
+		$headers.="Content-Type: text/html; charset=UTF-8\n";
+		if(!mail($patient->email, 'Szczepienia - kod weryfikacyjny', $body, $headers)) die('error mailingu');
 	}
 	
 	public function action_logout(){

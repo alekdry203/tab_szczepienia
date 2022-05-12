@@ -2,7 +2,7 @@
 	<div class="searchBox">
 		<div class="searchFormEl">
 			<label>Dzień:</label>
-			<input type="date" name="vaccination_date" min="<?//= date('Y-m-d') ?>" value="<?= @$_GET['vaccination_date'] ? : date('Y-m-d') ?>" required onchange="$('form').submit();" />
+			<input type="date" name="vaccination_date" min="<?= date('Y-m-d') ?>" value="<?= @$_GET['vaccination_date'] ? : date('Y-m-d') ?>" required onchange="$('form').submit();" />
 		</div>
 		
 		<div class="searchFormEl">

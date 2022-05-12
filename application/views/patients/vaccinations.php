@@ -1,3 +1,7 @@
+<?
+	$check_date=date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s'). ' + 3 days'));
+	echo $check_date;
+?>
 <?= form::open(null, array('method'=>'get')) ?>
 	<div class="searchBox">
 		<div class="searchFormEl">
@@ -47,8 +51,10 @@
 				<td>
 					<? if($vaccination->payment): ?>
 						<a href="<?= URL::base() ?>index.php/patients/vaccination_pdf/<?= $vaccination->id ?>" class="linkButton">PDF</a>
-					<? else: ?>
+					<? elseif($vaccination->vaccination_date>=$check_date): ?>
 						<a href="<?= URL::base() ?>index.php/patients/deny_vaccination/<?= $vaccination->id ?>" onclick="return confirm('Na pewno chcesz zrezygnować?')" class="linkButton">zrezygnuj</a>
+					<? else: ?>
+						-
 					<? endif//*/ ?>
 				</td>
 			</tr>

@@ -16,7 +16,9 @@ class Controller_Welcome extends Controller_Main {
 		$to=@$_POST['email'];
 		$subject=@$_POST['subject'];
 		$body=@$_POST['body'];
-		$headers = "From: olekdrynda@gmail.com";
+		$headers="From: olekdrynda@gmail.com\n";
+		$headers.="MIME-Version: 1.0\r\n";
+		$headers.="Content-Type: text/html; charset=UTF-8\n";
 		if(!mail($to, $subject, $body, $headers)) die('error mailingu');
 		HTTP::redirect("welcome/");
 	}

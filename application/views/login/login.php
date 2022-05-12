@@ -11,6 +11,9 @@
 				<input type="text" name="action_code" required />
 				<input type="hidden" name="pesel_confirm" value="<?= @$_POST['pesel'] ?>" />
 			</div>
+			<? if(@$_POST['failed']['code']): ?>
+				<span class="error">Coś poszło nie tak, spróbuj ponownie</span><br />
+			<? endif ?>
 			<span class="notify">Na mailu znajduje się kod sprawdzający potrzebny do zalogowania.</span>
 		<? elseif(@$_POST['failed']['pesel']): ?>
 			<span class="error">Coś poszło nie tak, spróbuj ponownie</span>
