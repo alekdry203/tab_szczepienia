@@ -4,7 +4,7 @@ class Controller_Login extends Controller_Main {
 	
 	public function before(){
 		parent::before();
-		if(@$_SESSION['pesel']) HTTP::redirect("patients/");
+		if(@$_SESSION['pesel'] && $_SERVER['REQUEST_URI']==str_replace('logout', '', $_SERVER['REQUEST_URI'])) HTTP::redirect("patients/");
 	}
 	
 	public function action_index(){
