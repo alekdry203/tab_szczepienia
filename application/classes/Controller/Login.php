@@ -63,7 +63,7 @@ class Controller_Login extends Controller_Main {
 	private function send_verification_code($patient){
 		$patient->action_code=substr(uniqid(),0,12);
 		$patient->save();
-		@$_SESSION['action_code']=$patient->action_code;
+		//@$_SESSION['action_code']=$patient->action_code;
 		$body=View::factory("login/action_code_mail", compact('patient'));
 		$headers="From: olekdrynda@gmail.com\n";
 		$headers.="MIME-Version: 1.0\r\n";
