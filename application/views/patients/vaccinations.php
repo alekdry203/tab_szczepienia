@@ -45,13 +45,11 @@
 				<td><?= $vaccination->vaccine->name.' '.$vaccination->vaccine->producer ?></td>
 				<td><?= $vaccination->payment ? 'zrealizowane' : 'zarezerwowane' ?></td>
 				<td>
-					<?/* if($vaccination->payment): ?>
+					<? if($vaccination->payment): ?>
 						<a href="<?= URL::base() ?>index.php/patients/vaccination_pdf/<?= $vaccination->id ?>" class="linkButton">PDF</a>
 					<? else: ?>
 						<a href="<?= URL::base() ?>index.php/patients/deny_vaccination/<?= $vaccination->id ?>" onclick="return confirm('Na pewno chcesz zrezygnować?')" class="linkButton">zrezygnuj</a>
 					<? endif//*/ ?>
-					<a href="<?= URL::base() ?>index.php/patients/vaccination_pdf/<?= $vaccination->id ?>" class="linkButton">PDF</a>
-					<a href="<?= URL::base() ?>index.php/patients/deny_vaccination/<?= $vaccination->id ?>" onclick="return confirm('Na pewno chcesz zrezygnować?')" class="linkButton">zrezygnuj</a>
 				</td>
 			</tr>
 		<? endforeach ?>

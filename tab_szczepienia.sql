@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `patients` (
 DELETE FROM `patients`;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
 INSERT INTO `patients` (`pesel`, `name`, `surname`, `city`, `street`, `local_no`, `email`, `action_code`) VALUES
-	(12345678901, 'Grzegorz', 'Brzęczyszczykliewicz', 'Łękołody', 'Polna', '1b', 'adres@em.ail', NULL);
+	(12345678901, 'Grzegorz', 'Brzęczyszczykliewicz', 'Łękołody', 'Polna', '1b', 'alekdry203@student.polsl.pl', '627a8ed3d097');
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 
 -- Zrzut struktury tabela tab_vaccinations.timetable
@@ -74,9 +74,9 @@ CREATE TABLE IF NOT EXISTS `timetable` (
   CONSTRAINT `fk_timetable_patients1` FOREIGN KEY (`patients_pesel`) REFERENCES `patients` (`pesel`),
   CONSTRAINT `fk_timetable_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_timetable_vaccinations_warehouse1` FOREIGN KEY (`vaccinations_warehouse_serial_no`) REFERENCES `vaccinations_warehouse` (`serial_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Zrzucanie danych dla tabeli tab_vaccinations.timetable: ~6 rows (około)
+-- Zrzucanie danych dla tabeli tab_vaccinations.timetable: ~11 rows (około)
 DELETE FROM `timetable`;
 /*!40000 ALTER TABLE `timetable` DISABLE KEYS */;
 INSERT INTO `timetable` (`id`, `vaccination_date`, `users_id`, `patients_pesel`, `vaccinations_warehouse_serial_no`, `payment`, `activation_code`) VALUES
@@ -85,7 +85,12 @@ INSERT INTO `timetable` (`id`, `vaccination_date`, `users_id`, `patients_pesel`,
 	(12, '2022-04-15 11:33:00', 1, NULL, NULL, NULL, NULL),
 	(14, '2022-04-18 11:26:00', 1, NULL, NULL, NULL, NULL),
 	(15, '2022-04-18 11:41:00', 1, NULL, NULL, NULL, NULL),
-	(16, '2022-04-18 11:56:00', 1, NULL, NULL, NULL, NULL);
+	(16, '2022-04-18 11:56:00', 1, NULL, NULL, NULL, NULL),
+	(17, '2022-04-20 12:00:00', 1, 12345678901, 5679, NULL, '627d6ccc559e'),
+	(18, '2022-04-20 12:15:00', 1, 12345678901, 5680, 1, '627d6cd535ec'),
+	(19, '2022-04-20 12:30:00', 1, NULL, NULL, NULL, NULL),
+	(20, '2022-04-20 12:45:00', 1, NULL, NULL, NULL, NULL),
+	(21, '2022-04-20 13:00:00', 1, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `timetable` ENABLE KEYS */;
 
 -- Zrzut struktury tabela tab_vaccinations.users
@@ -115,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `vaccinations_warehouse` (
   PRIMARY KEY (`serial_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Zrzucanie danych dla tabeli tab_vaccinations.vaccinations_warehouse: ~11 rows (około)
+-- Zrzucanie danych dla tabeli tab_vaccinations.vaccinations_warehouse: ~13 rows (około)
 DELETE FROM `vaccinations_warehouse`;
 /*!40000 ALTER TABLE `vaccinations_warehouse` DISABLE KEYS */;
 INSERT INTO `vaccinations_warehouse` (`serial_no`, `name`, `producer`, `expiration_date`) VALUES
