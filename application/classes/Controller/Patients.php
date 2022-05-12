@@ -65,7 +65,34 @@ class Controller_Patients extends Controller_Main {
 	}
 	
 	public function action_vaccination_pdf(){
-		die('generowanie i pobieranie pdf szczepienia');
+		//die('generowanie i pobieranie pdf szczepienia');
+		
+		$data['patient']=ORM::factory('Patient', $_SESSION['pesel']);
+		$data['vaccination']=ORM::factory('Timetable', $this->request->param("id"));
+		
+		$name=$data['patient']->pesel.'_'.str_replace(':', '-', $data['vaccination']->vaccination_date);
+		$name.='_'.$data['vaccination']->vaccine->name.'_'.$data['vaccination']->vaccine->producer;
+		require_once('../TCPDF/tcpdf.php');
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);			
+		$pdf->SetTitle($name);
+		$pdf->setFontSubsetting(true);
+		$pdf->SetFont('freeserif', 'b', 16);
+		$pdf->setPageOrientation('L');
+		$pdf->AddPage();
+		
+		$to_file=false;
+		
+		$view=View::factory("patients/pdf", @$data);
+		//echo $view;die();
+		$pdf->writeHTML($view, true, false, true, false, '');
+		
+		if(@$to_file){
+			$pdf->Output(str_replace('application\classes\Controller', 'public\\', __DIR__).$name.".pdf", 'F'); //generowany do pliku w folderze public
+		}else{
+			$pdf->Output($name.".pdf"); //generowany do przeglądarki
+		}
+		
+		die();
 	}
 	
 }
