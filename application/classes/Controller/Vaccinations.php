@@ -35,10 +35,10 @@ class Controller_Vaccinations extends Controller_Main {
 	
 	public function action_sign_up(){
 		$this->check_if_logged();
-		die('wybrane z listy wszystko - wysłać kod aktywacyjny');
+		//die('wybrane z listy wszystko - wysłać kod aktywacyjny');
 		
 		$vaccination=ORM::factory('Timetable', $this->request->param("id"));
-		$tmp=explode($_GET['vaccine']);
+		$tmp=explode(';', $_GET['vaccine']);
 		if(!$tmp[0] || !$tmp[1] || !$vaccination->id) HTTP::redirect("vaccinations/index?fail=1");
 		
 		$vaccine=ORM::factory('Vaccinationwarehouse')
@@ -57,7 +57,8 @@ class Controller_Vaccinations extends Controller_Main {
 		$vaccination->save();
 		//die('wysłać maila z potwierdzeniem i kodem aktywacyjnym szczepienia');
 		$this->vaccination_reservation_mail($vaccination);
-		HTTP::redirect("vaccinations/history");
+		HTTP::redirect("patients/vaccinations");
+		//HTTP::redirect("vaccinations/history");
 	}
 	
 	private function vaccination_reservation_mail($vaccination){
@@ -71,13 +72,13 @@ class Controller_Vaccinations extends Controller_Main {
 	private function check_if_logged(){
 		if(@$_SESSION['user_name'] && @$_SESSION['user_surname'] && @$_SESSION['pesel']) return;
 		$_SESSION['redirect']=str_replace(URL::base().'index.php/', '', $_SERVER['REQUEST_URI']);
-		HTTP::redirect("login");/*/
+		HTTP::redirect("login");/*
 		$_SESSION['pesel']=12345678901;
 		$_SESSION['user_name']='Grzegorz';
 		$_SESSION['user_surname']='Brzęczyszczykliewicz';//*/
 	}
 	
-	public function action_history(){
+	/*public function action_history(){
 		$this->check_if_logged();
 		$data['patient']=RM::factory('Patient', @$_SESSION['pesel']);
 		$vaccinations=$data['patient']->timetables;
@@ -96,7 +97,7 @@ class Controller_Vaccinations extends Controller_Main {
 		
 		if(@$_GET['status']==1) $vaccinations->where('patients_pesel', 'is', null);
 		elseif(@$_GET['status']==2) $vaccinations->where('patients_pesel', 'is not', null)->where('payment', 'is', null);
-		elseif(@$_GET['status']==3) $vaccinations->where('payment', 'is not', null);//*/
-	}
+		elseif(@$_GET['status']==3) $vaccinations->where('payment', 'is not', null);//*
+	}//*/
 	
 }

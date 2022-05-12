@@ -2,6 +2,11 @@
 
 class Controller_Login extends Controller_Main {
 	
+	public function before(){
+		parent::before();
+		if(@$_SESSION['pesel']) HTTP::redirect("patients/");
+	}
+	
 	public function action_index(){
 		//if(@$_SESSION['user_id']) HTTP::redirect("admin/users");
 		if(@$_POST['registration']) $this->registration();

@@ -12,7 +12,7 @@
 					<?
 						$get_id=$vaccine->name.';'.$vaccine->producer;
 					?>
-					<option value="<?= $get_id ?>" <?= $get_id==@$_GET['vaccine'] ? 'selected' : null ?>><?= $vaccine->name.' ('.$vaccine->producer.')' ?></option>
+					<option value="<?= $get_id ?>" <?= $get_id==@$_GET['vaccine'] ? 'selected' : null ?>><?= $vaccine->name.' ['.$vaccine->producer.']' ?></option>
 				<? endforeach ?>
 			</select>
 		</div>

@@ -31,3 +31,14 @@
 		<input type="submit" class="button" value="zapisz" />
 	</div>
 <?= form::close() ?>
+
+<? if(@$_POST): ?>
+	<span class="changesSaved">Zmiany zapisano pomyślnie!</span>
+	<script>
+		$(document).ready(function(){
+			setTimeout(function (){
+				$('.changesSaved').hide();
+			}, 5000);
+		});
+	</script>
+<? endif ?>
