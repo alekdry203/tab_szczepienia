@@ -5,6 +5,7 @@ class Controller_Patients extends Controller_Main {
 	public function before(){
 		parent::before();
 		if(!@$_SESSION['pesel']) HTTP::redirect("login/");
+		ORM::factory('Log')->register();
 	}
 	
 	public function action_index(){

@@ -8,6 +8,9 @@ class Controller_Admin_Main extends Controller_Template {
 		parent::before();
 		session_start();
 		if(!@$_SESSION['user_id']) HTTP::redirect("admin/login/logout");
+		ORM::factory('Log')->register();
 	}
-
+	
+	
+	
 }

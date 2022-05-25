@@ -8,5 +8,9 @@
 							'model'=>'Timetable',
 							'foreign_key'=>'patients_pesel',
 						),
+			'logs'=>array(
+						'model'=>'Log',
+						'foreign_key'=>'patient_pesel',
+					),
 	);//*/
 }

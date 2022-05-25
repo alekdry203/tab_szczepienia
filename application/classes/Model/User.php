@@ -8,5 +8,9 @@
 						//'far_key'=>'user_id', // klucz obcy z drugiej tabeli (chyba)
 						'foreign_key'=>'user_id', // klucz obcy z tej tabeli (chyba - możliwe że na odwrót z w/w)
 					),
+			'logs'=>array(
+						'model'=>'Log',
+						'foreign_key'=>'user_id',
+					),
 	);//*/
 }
