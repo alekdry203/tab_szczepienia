@@ -225,6 +225,11 @@ Route::set('patients', 'patients(/<action>(/<id>)(/<id2>))')
   ));
 Route::set('default', '(/<controller>(/<action>(/<id>)(/<id2>)))')
   ->defaults(array(
+    'controller'  => 'vaccinations',
+    'action'    => 'vaccines',
+  ));
+/*Route::set('default', '(/<controller>(/<action>(/<id>)(/<id2>)))')
+  ->defaults(array(
     'controller'  => 'welcome',
     'action'    => 'index',
-  ));
+  ));//*/

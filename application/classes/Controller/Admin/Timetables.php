@@ -32,6 +32,13 @@ class Controller_Admin_Timetables extends Controller_Admin_Main {
 		//print_r($_POST);die();
 		$time=strtotime($_POST['date'].' '.$_POST['time']);
 		for($i=0; $i<$_POST['amount']; $i++){
+			$check=ORM::factory('Timetable')
+						->where('users_id', '=', $_POST['user_id'])
+						->where('vaccination_date', '>=', date('Y-m-d H:i:s', ($time+($i*60*$_POST['period'])-(3*60))))
+						->where('vaccination_date', '<=', date('Y-m-d H:i:s', ($time+($i*60*$_POST['period'])+(3*60))))
+						->find();
+						
+			if($check->id) continue;
 			$tmp=date('Y-m-d H:i:s', ($time+($i*60*$_POST['period'])));
 			//echo $tmp;die();
 			$timetable=ORM::factory('Timetable');

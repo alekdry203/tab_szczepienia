@@ -5,6 +5,7 @@ class Controller_Main extends Controller_Template {
 	public $template='template/main';
 	
 	public function before(){
+		//die('zrobić sprawdzanie przy zapisywaniu okienek czy się nie nakłada');
 		//włączyć short tagi dla php (poniżej instrukcja)
 		// https://stackoverflow.com/questions/5603898/php-file-with-tags-in-xampp
 		
