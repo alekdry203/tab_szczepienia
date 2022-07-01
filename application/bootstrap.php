@@ -121,6 +121,7 @@ if (isset($_SERVER['KOSEVEN_ENV']))
  */
 KO7::init([
 	'base_url'   => '/tab_szczepienia/public',
+	//'index_file' => "",
 ]);
 
 /**

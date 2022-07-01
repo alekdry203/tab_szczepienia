@@ -3,7 +3,6 @@
 		<div class="formEl">
 			<label>Numer partii:</label>
 			<input type="text" name="serial_no" value="<?= @$vaccine->serial_no ?>" required />
-			sprawdzić ajaxem czy można taki dodać
 		</div>
 		<div class="formEl">
 			<label>Nazwa:</label>
@@ -19,7 +18,7 @@
 		</div>
 		<input type="submit" class="button" value="zapisz" />
 		<? if(@$vaccine->serial_no): ?>
-			<a href="<?= URL::base() ?>index.php/admin/users/delete<?= $vaccine->serial_no ?>" class="button">usuń</a>
+			<a href="<?= URL::base() ?>index.php/admin/warehouse/delete/<?= $vaccine->serial_no ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="button">usuń</a>
 		<? endif ?>
 	</div>
 <?= form::close() ?>

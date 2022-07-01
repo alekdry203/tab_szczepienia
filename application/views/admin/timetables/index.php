@@ -12,7 +12,7 @@
 			<select name="user_id">
 				<option value="">wybierz</option>
 				<? foreach($users as $user): ?>
-					<option value="<?= $user->id ?>"><?= $user->name.' '.$user->surname ?></option>
+					<option value="<?= $user->id ?>" <?= @$_GET['user_id']==$user->id ? 'selected' : null ?>><?= $user->name.' '.$user->surname ?></option>
 				<? endforeach ?>
 			</select>
 		</div>

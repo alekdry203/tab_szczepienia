@@ -1,5 +1,4 @@
 <?php class Model_Log extends ORM {
-	//protected $_table_name='users';
 	
 	protected $_belongs_to=array(
 			'users'=>array(

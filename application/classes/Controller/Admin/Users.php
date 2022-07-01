@@ -6,7 +6,6 @@ class Controller_Admin_Users extends Controller_Admin_Main {
 		$users=ORM::factory('User');
 		if(@$_GET) $this->filter($users);
 		$data['users']=$users->order_by('name')->order_by('surname')->find_all();
-		//print_r($data['users']);die();
 		$this->template->content=View::factory("admin/users/index", $data);
 	}
 	
@@ -30,7 +29,7 @@ class Controller_Admin_Users extends Controller_Admin_Main {
 		$user->surname=$_POST['surname'];
 		$user->login=$_POST['login'];
 		$user->admin=@$_POST['admin'] ? : null;
-		if(@$_POST['password']) $user->admin=$this->pass_hash($_POST['password']);
+		if(@$_POST['password']) $user->password=$this->pass_hash($_POST['password']);
 		$user->save();
 		HTTP::redirect("admin/users?login=".$user->login);
 	}

@@ -38,6 +38,5 @@
 				</div>
 			<? endif ?>
 		</div>
-		<?//*/?><?//*/?>
 	<? endforeach ?>
 </div>

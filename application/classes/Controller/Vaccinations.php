@@ -35,7 +35,6 @@ class Controller_Vaccinations extends Controller_Main {
 	
 	public function action_sign_up(){
 		$this->check_if_logged();
-		//die('wybrane z listy wszystko - wysłać kod aktywacyjny');
 		
 		$vaccination=ORM::factory('Timetable', $this->request->param("id"));
 		$tmp=explode(';', $_GET['vaccine']);
@@ -55,49 +54,19 @@ class Controller_Vaccinations extends Controller_Main {
 		$vaccination->patients_pesel=$_SESSION['pesel'];
 		$vaccination->activation_code=substr(uniqid(),0,12);
 		$vaccination->save();
-		//die('wysłać maila z potwierdzeniem i kodem aktywacyjnym szczepienia');
 		$this->vaccination_reservation_mail($vaccination);
 		HTTP::redirect("patients/vaccinations");
-		//HTTP::redirect("vaccinations/history");
 	}
 	
 	private function vaccination_reservation_mail($vaccination){
-		//$patient=ORM::factory('Patient', $vaccination->patients_pesel);
 		$body=View::factory("vaccinations/vaccination_reservation_mail", compact('vaccination'));
-		//$body='testowa wiadomość';
-		//$headers; //dodać jak nie działa
 		mail($vaccination->patient->email, 'Szczepienia - rezerwacja szczepienia', $body);
 	}
 	
 	private function check_if_logged(){
 		if(@$_SESSION['user_name'] && @$_SESSION['user_surname'] && @$_SESSION['pesel']) return;
 		$_SESSION['redirect']=str_replace(URL::base().'index.php/', '', $_SERVER['REQUEST_URI']);
-		HTTP::redirect("login");/*
-		$_SESSION['pesel']=12345678901;
-		$_SESSION['user_name']='Grzegorz';
-		$_SESSION['user_surname']='Brzęczyszczykliewicz';//*/
+		HTTP::redirect("login");
 	}
-	
-	/*public function action_history(){
-		$this->check_if_logged();
-		$data['patient']=RM::factory('Patient', @$_SESSION['pesel']);
-		$vaccinations=$data['patient']->timetables;
-		if(@$_GET) $this->filter_history($vaccinations);
-		$data['vaccinations']=$vaccinations->find_all();
-		$this->template->content=View::factory("vaccinations/history", $data);
-	}
-	
-	private function filter_history($vaccinations){
-		if(@$_GET['vaccination_date'][0]) $vaccinations->where('vaccination_date', '>=', @$_GET['vaccination_date'][0]);
-		if(@$_GET['vaccination_date'][1]) $vaccinations->where('vaccination_date', '>=', @$_GET['vaccination_date'][1]);
-		
-		if(@$_GET['name'] || @$_GET['producer']) $vaccinations->join(array('vaccinations_warehouse', 'vw'), 'left')->on('vw.serial_no', '=', 'vaccinations_warehouse_serial_no');//->group_by('id');
-		if(@$_GET['name']) $vaccinations->where('vw.name', 'like', '%'.@$_GET['name'].'%');
-		if(@$_GET['producer']) $vaccinations->where('vw.producer', 'like', '%'.@$_GET['producer'].'%');
-		
-		if(@$_GET['status']==1) $vaccinations->where('patients_pesel', 'is', null);
-		elseif(@$_GET['status']==2) $vaccinations->where('patients_pesel', 'is not', null)->where('payment', 'is', null);
-		elseif(@$_GET['status']==3) $vaccinations->where('payment', 'is not', null);//*
-	}//*/
 	
 }

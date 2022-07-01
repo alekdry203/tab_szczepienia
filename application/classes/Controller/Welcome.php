@@ -3,12 +3,6 @@
 class Controller_Welcome extends Controller_Main {
 
 	public function action_index(){
-		//$id=$this->request->param("id");
-		//$x=ORM::factory('Vaccinationwarehouse');
-		//$x=ORM::factory('Patient');
-		//$x=ORM::factory('User');
-		//$x=ORM::factory('Timetable');
-		//print_r($x->vaccine);die();
 		$this->template->content=View::factory("welcome/index");
 	}
 	
@@ -24,8 +18,6 @@ class Controller_Welcome extends Controller_Main {
 	}
 	
 	public function action_tcpdf_test(){
-		//die('w trakcie');
-		//$this->auto_render=false;
 		$name='testowy_pdf';
 		require_once('../TCPDF/tcpdf.php');
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);			

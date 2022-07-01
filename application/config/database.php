@@ -28,5 +28,5 @@ return array
 		'charset'      => 'utf8',
 		'caching'      => FALSE,
 		'profiling'    => TRUE,
-	)
+	),//*/
 );

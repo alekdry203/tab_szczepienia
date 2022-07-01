@@ -29,3 +29,9 @@
 	</div>
 	<input type="submit" class="button" value="zapisz" />
 <?= form::close() ?>
+<script>
+	$('form').submit(function(){
+		$('select').attr('disabled', false);
+		$('input').attr('disabled', false);
+	});
+</script>

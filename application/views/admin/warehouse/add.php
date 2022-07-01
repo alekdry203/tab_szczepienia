@@ -6,7 +6,6 @@
 			 - 
 			<input type="text" name="serial_no[1]" value="" required />
 			<span class="error serialNoError">Numer partii od nie może być większy niż numer partii do!</span>
-			sprawdzić ajaxem czy można taki zakres dodać
 		</div>
 		<div class="formEl">
 			<label>Nazwa:</label>
@@ -26,6 +25,9 @@
 
 <script>
 	$(document).ready(function(){
+		$('form').submit(function(){
+			$('select').attr('disabled', false);
+		});
 		// numer 0 nie może być większy od 1
 		$('input[name="serial_no[0]"]').change(function(){
 			check_serial_no();

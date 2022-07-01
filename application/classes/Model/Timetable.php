@@ -2,7 +2,7 @@
 	
 	protected $_table_name='timetable';
 	
-	protected $_belongs_to=array( // relacja jeden do wielu - podrzędna tabela (możnaby użyć zamiast tego $_has_one)
+	protected $_belongs_to=array(
 			'user'=>array(
 						'model'=>'User',
 						'foreign_key'=>'users_id',

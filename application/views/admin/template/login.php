@@ -7,8 +7,6 @@
 		<title>TAB Szczepienia</title>
 		<script src="<?=URL::base() ?>media/js/jquery-3.6.0.min.js"></script>
 		<link rel="stylesheet" href="<?=URL::base() ?>media/css/admin.css">
-		
-		<!--link rel="shortcut icon" href="<?=URL::base() ?>media/img/favicon.ico" type="image/x-icon"-->
 	</head>
 	<body>
 		<?= View::factory('admin/template/header') ?>

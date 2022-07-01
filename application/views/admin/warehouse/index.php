@@ -84,8 +84,8 @@
 			check_serial_no();
 		});
 		function check_serial_no(){
-			var date0=$('input[name="serial_no[0]"]').val();
-			var date1=$('input[name="serial_no[1]"]').val();
+			var date0=parseInt($('input[name="serial_no[0]"]').val());
+			var date1=parseInt($('input[name="serial_no[1]"]').val());
 			if(date0 && date1 && date0>date1){
 				$('input[name="serial_no[1]"]').val(date0)
 				$('.serialNoError').show();

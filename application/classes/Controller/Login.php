@@ -8,7 +8,6 @@ class Controller_Login extends Controller_Main {
 	}
 	
 	public function action_index(){
-		//if(@$_SESSION['pesel']) HTTP::redirect("admin/users");
 		if(@$_POST['registration']) $this->registration();
 		elseif(@$_POST['pesel']) $this->verify_pesel();
 		elseif(@$_POST['pesel_confirm'] && @$_POST['action_code']) $this->verify_code();
@@ -18,7 +17,6 @@ class Controller_Login extends Controller_Main {
 	private function verify_pesel(){
 		$patient=ORM::factory('Patient')->where('pesel', 'like', @$_POST['pesel'])->find();
 		if($patient->pesel){
-			//die('lol');
 			$this->send_verification_code($patient);
 		}else{
 			@$_POST['failed']['pesel']=1;
@@ -28,7 +26,6 @@ class Controller_Login extends Controller_Main {
 	private function verify_code(){
 		$patient=ORM::factory('Patient')->where('pesel', 'like', @$_POST['pesel_confirm'])->find();
 		if(!$patient->pesel || $patient->action_code!=$_POST['action_code']){
-			//die('wysłać drugi kod');
 			@$_POST['failed']['code']=1;
 			@$_POST['pesel']=@$_POST['pesel_confirm'];
 			unset($_POST['pesel_confirm']);
@@ -63,7 +60,6 @@ class Controller_Login extends Controller_Main {
 	private function send_verification_code($patient){
 		$patient->action_code=substr(uniqid(),0,12);
 		$patient->save();
-		//@$_SESSION['action_code']=$patient->action_code;
 		$body=View::factory("login/action_code_mail", compact('patient'));
 		$headers="From: olekdrynda@gmail.com\n";
 		$headers.="MIME-Version: 1.0\r\n";

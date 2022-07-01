@@ -22,17 +22,62 @@
 		<div class="formEl">
 			<label>PESEL pacjenta:</label>
 			<input type="text" name="patients_pesel" value="<?= $timetable->patients_pesel ?>" />
+			<span class="error incorrect_pesel">Niepoprawna długość peslu!</span>
 		</div>
-		dodać wybór szczepionki
+		<div class="formEl">
+			<label>Szczepionka:</label>
+			<select name="vaccine">
+				<option value="">wybierz</option>
+				<? foreach($vaccines as $vaccine): ?>
+					<?
+						$v=$vaccine->name.';'.$vaccine->producer;
+						$tv=$timetable->vaccine->name.';'.$timetable->vaccine->name;
+					?>
+					<option value="<?= $v ?>" <?= $v==$tv ? 'selected' : null ?>><?= $vaccine->name.' ['.$vaccine->producer.']' ?></option>
+				<? endforeach ?>
+			</select>
+		</div>
 		<div class="formEl">
 			<label>Opłacono:</label>
 			<input type="checkbox" name="payment" value="1" <?= $timetable->payment ? 'checked' : null ?> />
 		</div>
 		<div class="formEl">
-			<label>PESEL pacjenta:</label>
+			<label>Kod aktywacyjnya:</label>
 			<input type="text" name="activation_code" value="<?= $timetable->activation_code ?>" disabled />
 		</div>
 	</div>
 	<input type="submit" class="button" value="zapisz" />
 	<a href="<?= URL::base() ?>index.php/admin/timetables/delete/<?= $timetable->id ?>"  onclick="return confirm('Na pewno chcesz usunąć?')" class="linkButton">usuń</a>
 <?= form::close() ?>
+<script>
+	$('form').submit(function(){
+		$('select').attr('disabled', false);
+		$('input').attr('disabled', false);
+	});
+	
+	$(document).ready(function(){
+		check_pesel();
+		$('input[name=patients_pesel]').change(function(){
+			check_pesel();
+		});
+	});
+	
+	function check_pesel(){
+		var x=$('input[name=patients_pesel]').val();
+		if(x.length==11){
+			$('input[type=submit]').show();
+			$('.incorrect_pesel').hide();
+			$('input[name=payment]').attr('disabled',false);
+		}else if(x.length==0){
+			$('input[type=submit]').show();
+			$('.incorrect_pesel').hide();
+			$('input[name=payment]').prop('checked', false);
+			$('input[name=payment]').attr('disabled', true);
+		}else{
+			$('input[type=submit]').hide();
+			$('.incorrect_pesel').show();
+			$('input[name=payment]').prop('checked', false);
+			$('input[name=payment]').attr('disabled', true);
+		}
+	}
+</script>

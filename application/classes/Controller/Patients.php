@@ -15,7 +15,6 @@ class Controller_Patients extends Controller_Main {
 	}
 	
 	private function save_patient(){
-		//print_r($_POST);die();
 		$patient=ORM::factory('Patient', $_SESSION['pesel']);
 		foreach(@$_POST as $key=>$val)
 			if($val)
@@ -34,28 +33,22 @@ class Controller_Patients extends Controller_Main {
 	}
 	
 	private function filter_vaccinations($vaccinations){
-		//print_r(@$_GET);die();
 		if(@$_GET['date'][0]) $vaccinations->where('vaccination_date', '>=', @$_GET['date'][0]);
-		if(@$_GET['date'][1]) $vaccinations->where('vaccination_date', '>=', @$_GET['date'][1]);
+		if(@$_GET['date'][1]) $vaccinations->where('vaccination_date', '<=', @$_GET['date'][1]);
 		
 		if(@$_GET['vaccine']){
 			$tmp=explode(';', $_GET['vaccine']);
-			if(!$tmp[0] && !$tmp[1]) $vaccinations->join(array('vaccinations_warehouse', 'vw'), 'left')
+			if($tmp[0] && $tmp[1]) $vaccinations->join(array('vaccinations_warehouse', 'vw'), 'left')
 													->on('vw.serial_no', '=', 'vaccinations_warehouse_serial_no')
 													->where('name', 'like', $tmp[0])
 													->where('producer', 'like', $tmp[1]);
 		}
-		
-		/*if(@$_GET['name'] || @$_GET['producer']) $vaccinations->join(array('vaccinations_warehouse', 'vw'), 'left')->on('vw.serial_no', '=', 'vaccinations_warehouse_serial_no');//->group_by('id');
-		if(@$_GET['name']) $vaccinations->where('vw.name', 'like', '%'.@$_GET['name'].'%');
-		if(@$_GET['producer']) $vaccinations->where('vw.producer', 'like', '%'.@$_GET['producer'].'%');//*/
 		
 		if(@$_GET['status']==2) $vaccinations->where('payment', 'is', null);
 		elseif(@$_GET['status']==3) $vaccinations->where('payment', 'is not', null);//*
 	}
 	
 	public function action_deny_vaccination(){
-		//die('anulowanie szczepienia - zostawić zawartość kolumn vaccination_date i users_id dla tego szczepioenia, reszta null');
 		$vaccination=ORM::factory('Timetable', $this->request->param("id"));
 		
 		$check_date=date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s'). ' + 3 days'));
@@ -69,8 +62,6 @@ class Controller_Patients extends Controller_Main {
 	}
 	
 	public function action_vaccination_pdf(){
-		//die('generowanie i pobieranie pdf szczepienia');
-		
 		$data['patient']=ORM::factory('Patient', $_SESSION['pesel']);
 		$data['vaccination']=ORM::factory('Timetable', $this->request->param("id"));
 		
@@ -87,7 +78,6 @@ class Controller_Patients extends Controller_Main {
 		$to_file=false;
 		
 		$view=View::factory("patients/pdf", @$data);
-		//echo $view;die();
 		$pdf->writeHTML($view, true, false, true, false, '');
 		
 		if(@$to_file){

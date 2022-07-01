@@ -20,7 +20,7 @@
 		</div>
 		<input type="submit" class="button" value="zapisz" />
 		<? if(@$user->id): ?>
-			<a href="<?= URL::base() ?>index.php/admin/users/delete<?= $user->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="button">usuń</a>
+			<a href="<?= URL::base() ?>index.php/admin/users/delete/<?= $user->id ?>" onclick="return confirm('Na pewno chcesz usunąć?')" class="button">usuń</a>
 		<? endif ?>
 	</div>
 <?= form::close() ?>
